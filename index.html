@@ -5,29 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HTML Only</title>
+    <style>
+      body {
+        font-family: "Courier New", Courier, monospace;
+      }
+      form {
+        margin: auto;
+        max-width: 500px;
+      }
+      div > label {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+      div li {
+        text-shadow: 2px 2px 4px #000000;
+      }
+      div li:nth-child(odd) {
+        font-weight: 700;
+        font-size: 2rem;
+      }
+      div li:nth-child(even) {
+        font-weight: 200;
+        font-size: 2.25rem;
+      }
+      div li:first-child {
+        font-weight: 900;
+        font-size: 3rem;
+      }
+      div li:last-child {
+        font-weight: 100;
+        font-size: 1.5rem;
+      }
+    </style>
   </head>
 
-  <body style="font-family: 'Courier New', Courier, monospace;">
-    <form style="max-width: 500px; margin: auto">
+  <body>
+    <form>
       <fieldset>
         <legend>HTML FUN!</legend>
         <div>
-          <label
-            for="colors"
-            style="display: block; font-weight: 300; font-size: 1rem"
-            >Color</label
-          >
+          <label for="colors">Color</label>
           <input id="colors" list="color-list" type="color" />
         </div>
+        <hr />
         <div>
-          <hr />
-        </div>
-        <div>
-          <label
-            for="browsers"
-            style="display: block; font-weight: 400; font-size: 1.5rem"
-            >Web Browsers</label
-          >
+          <label for="browsers">Web Browsers</label>
           <input id="browsers" type="text" list="browser-list" />
           <datalist id="browser-list">
             <option value="Firefox"></option>
@@ -37,19 +60,11 @@
             <option value="Safari"></option>
           </datalist>
         </div>
+        <hr />
         <div>
-          <hr />
-        </div>
-        <div>
-          <label
-            for="todo"
-            style="display: block; font-weight: 500; font-size: 2rem"
-            >Todo List</label
-          >
+          <label for="todo">Todo List</label>
           <input id="todo" name="todo" type="text" placeholder="TODOs" />
           <input type="submit" value="Add Todo" />
-        </div>
-        <div>
           <ul id="todos"></ul>
         </div>
       </fieldset>
