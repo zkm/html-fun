@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fun with HTML, CSS, and JavaScript">
+    <meta name="description" content="Fun with HTML, CSS, and JavaScript" />
     <title>FUN with HTML, CSS, &amp; JS</title>
     <style>
       body {
@@ -46,8 +46,8 @@
       <fieldset>
         <legend>HTML FUN!</legend>
         <div>
-          <label for="colors">Color</label>
-          <input id="colors" list="color-list" type="color" />
+          <label id ="colorVal">Select color</label>
+          <input id="color" list="color-list" type="color" />
         </div>
         <hr />
         <div>
@@ -98,6 +98,14 @@
         event.preventDefault();
         addTodo(input.value);
       };
+
+      // Displaying Selected Color from input
+      let colorInput = document.getElementById("color");
+      let colorValue = colorInput.value;
+
+      colorInput.addEventListener("input", () => {
+        document.getElementById("colorVal").innerHTML = colorInput.value;
+      });
     </script>
   </body>
 </html>
