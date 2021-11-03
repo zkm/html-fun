@@ -1,111 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fun with HTML, CSS, and JavaScript" />
-    <title>FUN with HTML, CSS, &amp; JS</title>
-    <style>
-      body {
-        font-family: "Courier New", Courier, monospace;
-      }
-      form {
-        margin: auto;
-        max-width: 500px;
-      }
-      div > label {
-        display: block;
-        font-size: 1.5rem;
-        font-weight: 300;
-      }
-      div li {
-        text-shadow: 2px 2px 4px #000000;
-      }
-      div li:nth-child(odd) {
-        font-weight: 700;
-        font-size: 2rem;
-      }
-      div li:nth-child(even) {
-        font-weight: 200;
-        font-size: 2.25rem;
-      }
-      div li:first-child {
-        font-weight: 900;
-        font-size: 3rem;
-      }
-      div li:last-child {
-        font-weight: 100;
-        font-size: 1.5rem;
-      }
-    </style>
-  </head>
 
-  <body>
-    <form>
-      <fieldset>
-        <legend>HTML FUN!</legend>
-        <div>
-          <label id ="colorVal">Select color</label>
-          <input id="color" type="color" />
-        </div>
-        <hr />
-        <div>
-          <label for="browsers">Web Browsers</label>
-          <input id="browsers" type="text" list="browser-list" />
-          <datalist id="browser-list">
-            <option value="Firefox"></option>
-            <option value="IE"></option>
-            <option value="Chrome"></option>
-            <option value="Opera"></option>
-            <option value="Safari"></option>
-          </datalist>
-        </div>
-        <hr />
-        <div>
-          <label for="todo">Todo List</label>
-          <input id="todo" name="todo" type="text" placeholder="TODOs" />
-          <input type="submit" value="Add Todo" />
-          <ul id="todos"></ul>
-        </div>
-      </fieldset>
-    </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fun with HTML, CSS, and JavaScript" />
+  <title>FUN with HTML, CSS, &amp; JS</title>
+  <style>
+    body {
+      font-family: "Courier New", Courier, monospace;
+    }
 
-    <script>
-      const form = document.querySelector("form");
-      const input = document.querySelector("[name='todo']");
-      const todoList = document.getElementById("todos");
+    form {
+      margin: auto;
+      max-width: 500px;
+    }
 
-      // Side Effects / Lifecycle
-      const existingTodos = JSON.parse(localStorage.getItem("todos")) || [];
-      const todoData = [];
+    fieldset {
+      align-items: center;
+      color: green;
+      display: flex;
+      flex-direction: column;
+    }
 
-      existingTodos.forEach((todo) => {
-        addTodo(todo);
-      });
+    legend {
+      font-size: 3rem;
+      font-weight: 600;
+    }
 
-      function addTodo(todoText) {
-        todoData.push(todoText);
-        const li = document.createElement("li");
-        li.innerHTML = todoText;
-        todoList.appendChild(li);
-        localStorage.setItem("todos", JSON.stringify(todoData));
-        input.value = "";
-      }
+    div {
+      border: solid 1px #333;
+      border-radius: 10px;
+      margin: 3px;
+      padding: 3em;
+      text-align: center;
+    }
 
-      // Events
-      form.onsubmit = (event) => {
-        event.preventDefault();
-        addTodo(input.value);
-      };
+    div:hover {
+      border-color: red;
+    }
 
-      // Displaying Selected Color from input
-      let colorInput = document.getElementById("color");
-      let colorValue = colorInput.value;
+    div>label {
+      color: #000;
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: .5em;
+    }
 
-      colorInput.addEventListener("input", () => {
-        document.getElementById("colorVal").innerHTML = colorInput.value;
-      });
-    </script>
-  </body>
+    div li {
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    div li:nth-child(odd) {
+      color: brown;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    div li:nth-child(even) {
+      color: chocolate;
+      font-weight: 200;
+      font-size: 2.25rem;
+    }
+
+    div li:first-child {
+      font-weight: 900;
+      font-size: 3rem;
+    }
+
+    div li:last-child {
+      font-weight: 100;
+      font-size: 1.5rem;
+    }
+
+    #browserList {
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <fieldset>
+      <legend>HTML FUN!</legend>
+      <div>
+        <label id="colorVal">Select color</label>
+        <input id="color" type="color" />
+      </div>
+      <div>
+        <label for="browsers">Web Browsers</label>
+        <input id="browser" name="browser" type="text" list="browser-list" placeholder="Select a browser" />
+        <datalist id="browser-list">
+          <option value="Firefox"></option>
+          <option value="IE"></option>
+          <option value="Chrome"></option>
+          <option value="Opera"></option>
+          <option value="Safari"></option>
+        </datalist>
+        <input type="submit" value="Add Browser" />
+        <ul id="browserList"></ul>
+    </fieldset>
+  </form>
+
+  <script>
+    const form = document.querySelector("form");
+    const input = document.querySelector("[name='browser']");
+    const _list = document.getElementById("browserList");
+
+    // Side Effects / Lifecycle
+    const existingItems = JSON.parse(localStorage.getItem(input.name)) || [];
+    const _dataList = [];
+
+    existingItems.forEach((item) => {
+      addItem(item);
+    });
+
+    function addItem(itemText) {
+      _dataList.push(itemText);
+      const li = document.createElement("li");
+      li.innerHTML = itemText;
+      _list.appendChild(li);
+      localStorage.setItem(input.name, JSON.stringify(_dataList));
+      input.value = "";
+    }
+
+    // Events
+    form.onsubmit = (event) => {
+      event.preventDefault();
+      addItem(input.value);
+    };
+
+    // Displaying Selected Color from input
+    const colorInput = document.getElementById("color");
+
+    colorInput.addEventListener("input", () => {
+      document.getElementById("colorVal").innerHTML = 'You selected: ' + colorInput.value;;
+    });
+  </script>
+</body>
+
 </html>
